@@ -1,0 +1,64 @@
+{
+  "name": "k8s-az-dev",
+  "build": {
+    "dockerfile": "Dockerfile"
+    // If you ever want to pass your host UID/GID explicitly during build,
+    // build from WSL with: docker build --build-arg UID=$(id -u) --build-arg GID=$(id -g) ...
+  },
+
+  // Make the whole D: drive your workspace inside the container.
+  // If you prefer just the repo, change `source` to the specific path (e.g. /mnt/d/projects/my-repo).
+  "workspaceFolder": "/workspace",
+  "workspaceMount": "source=/mnt/d,target=/workspace,type=bind,consistency=cached",
+
+  "remoteUser": "dev",
+  "overrideCommand": false,
+
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "ms-azuretools.vscode-azureaccount",
+        "ms-vscode.azurecli",
+        "ms-azuretools.vscode-docker",
+
+        "ms-kubernetes-tools.vscode-kubernetes-tools",
+        "tim-koehler.helm-intellisense",
+        "redhat.vscode-yaml",
+
+        "HashiCorp.terraform",
+
+        "ms-python.python",
+
+        "eamodio.gitlens",
+        "github.vscode-pull-request-github",
+        "rogalmic.bash-debug"
+      ],
+      "settings": {
+        // Python
+        "python.defaultInterpreterPath": "/usr/bin/python",
+        "python.terminal.activateEnvironment": false,
+
+        // Kubernetes (kubectl is at /usr/local/bin/kubectl from the Dockerfile)
+        "vs-kubernetes.kubectl-path": "/usr/local/bin/kubectl",
+
+        // YAML (helpful for K8s + Helm charts)
+        "yaml.validate": true,
+        "yaml.format.enable": true,
+
+        // Terraform
+        "terraform.languageServer": {
+          "external": true
+        }
+      }
+    }
+  },
+
+  // Handy env you might want; uncomment to tweak defaults.
+  // "containerEnv": {
+  //   "KUBECONFIG": "/home/dev/.kube/config"
+  // },
+
+  // Run these after the container is created (but before VS Code attaches a terminal)
+  // You can add project-specific bootstrapping here.
+  "postCreateCommand": "git --version && az version && kubectl version --client && helm version && terraform version && python --version && pip --version"
+}
