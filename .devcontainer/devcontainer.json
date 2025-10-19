@@ -1,7 +1,7 @@
 {
   "name": "k8s-az-dev",
   "build": {
-    "dockerfile": "Dockerfile"
+    "dockerfile": "../Dockerfile"
   },
 
   // Mount the folder you opened in VS Code to /workspace
@@ -15,42 +15,70 @@
 
   "remoteUser": "dev",
 
-  // Keep the container alive (prevents the 'container is not running' error)
+  // Keep the container alive so VS Code can attach
   "overrideCommand": true,
 
-  // The CLI you’re using shows 'update-remote-user-uid-default on'.
-  // Disable UID/GID mutation since we already set them at build time.
+  // We already set the container user/UID at build time
   "updateRemoteUserUID": false,
 
   "customizations": {
     "vscode": {
       "extensions": [
+        // Azure & Docker
         "ms-azuretools.vscode-azureaccount",
         "ms-vscode.azurecli",
         "ms-azuretools.vscode-docker",
 
+        // Kubernetes / Helm / YAML
         "ms-kubernetes-tools.vscode-kubernetes-tools",
         "tim-koehler.helm-intellisense",
         "redhat.vscode-yaml",
 
+        // Terraform
         "HashiCorp.terraform",
 
+        // Python
         "ms-python.python",
 
+        // PowerShell (debugger, IntelliSense, etc.)
+        "ms-vscode.PowerShell",
+
+        // Git UX
         "eamodio.gitlens",
         "github.vscode-pull-request-github",
+
+        // Bash debugger
         "rogalmic.bash-debug"
       ],
       "settings": {
+        // Python
         "python.defaultInterpreterPath": "/usr/bin/python",
         "python.terminal.activateEnvironment": false,
+
+        // Kubernetes
         "vs-kubernetes.kubectl-path": "/usr/local/bin/kubectl",
+
+        // YAML
         "yaml.validate": true,
         "yaml.format.enable": true,
-        "terraform.languageServer": { "external": true }
+
+        // Terraform
+        "terraform.languageServer": { "external": true },
+
+        // PowerShell: point to pwsh and prefer it
+        "powershell.powerShellAdditionalExePaths": {
+          "PowerShell": "/usr/bin/pwsh"
+        },
+        "powershell.powerShellDefaultVersion": "PowerShell",
+
+        // Terminals (optional): expose a pwsh profile alongside bash
+        "terminal.integrated.profiles.linux": {
+          "bash": { "path": "/bin/bash" },
+          "pwsh": { "path": "/usr/bin/pwsh" }
+        }
       }
     }
   },
 
-  "postCreateCommand": "git --version && az version && kubectl version --client && helm version && terraform version && python --version && pip --version"
+  "postCreateCommand": "git --version && az version && kubectl version --client && helm version && terraform version && python --version && pip --version && pwsh -NoLogo -NoProfile -Command '$PSVersionTable.PSVersion; (Get-Module Az -ListAvailable | Select-Object -First 1 Name,Version)'"
 }
