@@ -1,7 +1,7 @@
 # 🧰 Kubernetes + Azure Dev Container Environment
 
 <a href="vscode://ms-vscode-remote.remote-containers/cloneInVolume?url=https://github.com/malctyler/toolscontainer">
-  <img alt="Open in Dev Containers" src="https://img.shields.io/badge/Open%20in-Dev%20Containers-2ea44f?logo=visualstudiocode">
+  <img alt="Open with Dev Containers" src="https://img.shields.io/badge/Open%20in-Dev%20Containers-2ea44f?logo=visualstudiocode">
 </a>
 ---
 
