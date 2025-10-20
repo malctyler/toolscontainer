@@ -1,8 +1,11 @@
 # 🧰 Kubernetes + Azure Dev Container Environment
 
-<a href="vscode://ms-vscode-remote.remote-containers/cloneInVolume?url=https://github.com/malctyler/toolscontainer">
-  <img alt="Open with Dev Containers" src="https://img.shields.io/badge/Open%20in-Dev%20Containers-2ea44f?logo=visualstudiocode">
-</a>
+[![Open in Dev Containers](https://img.shields.io/badge/Open%20in-Dev%20Containers-2ea44f?logo=visualstudiocode)](https://vscode.dev/redirect?url=vscode%3A%2F%2Fms-vscode-remote.remote-containers%2FcloneInVolume%3Furl%3Dhttps%3A%2F%2Fgithub.com%2Fmalctyler%2Ftoolscontainer)
+[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/malctyler/toolscontainer?quickstart=1)
+
+> 💡 **Tip:** The “Open in Dev Containers” button above works directly from GitHub.com using VS Code’s `vscode.dev/redirect` bridge.  
+> It will open VS Code on your machine, clone this repo, and automatically build the container — just approve the browser prompt.
+
 ---
 
 ## 📦 Overview
